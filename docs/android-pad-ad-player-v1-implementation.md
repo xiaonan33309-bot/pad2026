@@ -176,7 +176,8 @@
 ## 8. 下载管理与校验
 
 ### 8.1 断点续传
-- 临时文件必须写入应用沙箱目录（如 `context.cacheDir/downloads/` 或 `context.getExternalFilesDir(null)/downloads/`），禁止写入根路径（如 `/tmp/`）。
+- 临时文件必须写入应用沙箱目录（如 `context.cacheDir/downloads/`、`context.filesDir/downloads/` 或 `context.getExternalFilesDir(null)/downloads/`），禁止使用任何根路径（如 `/tmp/`）作为下载目录。
+- 若历史实现使用了非应用沙箱目录，升级时必须迁移到应用沙箱目录；迁移失败则按“未下载”处理并重新拉取，避免因权限问题导致下载中断。
 - 请求头 `Range: bytes=<downloadedBytes>-`。
 - 服务端返回 `206` 则续传，`200` 则全量重下并重置偏移。
 
