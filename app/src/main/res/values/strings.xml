@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Pad2026 Ads Player</string>
+    <string name="welcome_message">Hello from Pad2026 Android!</string>
+    <string name="bind_input_required">请输入 accountId 和绑定码</string>
+    <string name="bind_failed">绑定失败：%1$s</string>
+    <string name="foreground_service_desc">广告播放服务运行中</string>
+</resources>
