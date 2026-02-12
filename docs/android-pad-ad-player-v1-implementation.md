@@ -176,14 +176,14 @@
 ## 8. 下载管理与校验
 
 ### 8.1 断点续传
-- 临时文件写入 `/tmp/`。
+- 临时文件必须写入应用沙箱目录（如 `context.cacheDir/downloads/` 或 `context.getExternalFilesDir(null)/downloads/`），禁止写入根路径（如 `/tmp/`）。
 - 请求头 `Range: bytes=<downloadedBytes>-`。
 - 服务端返回 `206` 则续传，`200` 则全量重下并重置偏移。
 
 ### 8.2 完成后校验
 1. 比较文件 `size`。
 2. 计算 `sha256` 对比 `checksum`。
-3. 通过后原子移动到 `/videos/` 并更新 `verifyState = PASS`。
+3. 通过后原子移动到应用可持久化媒体目录（如 `context.filesDir/videos/` 或 `context.getExternalFilesDir(Environment.DIRECTORY_MOVIES)`）并更新 `verifyState = PASS`。
 4. 失败则删临时文件，`retryCount +1`，指数退避重试。
 
 ### 8.3 并发与资源控制
