@@ -45,8 +45,9 @@
    - 上报 `deviceId/appVersion/networkType/freeStorage/latestPlayAt/错误标记`
 
 8. **开机自启与保活**
-   - `BOOT_COMPLETED` 后自动注册周期同步并拉起前台服务
-   - 前台服务 `PlaybackForegroundService` 提升存活能力
+   - `BOOT_COMPLETED/LOCKED_BOOT_COMPLETED` 后自动拉起 App（进入启动路由）
+   - 启动后默认进入播放器霸屏流程（已绑定设备直达播放页）
+   - 同时注册周期同步并拉起前台服务，提升存活能力
 
 ## 关键目录
 
